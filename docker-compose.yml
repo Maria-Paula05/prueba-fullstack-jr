@@ -1,0 +1,44 @@
+services:
+  sqlserver:
+    image: mcr.microsoft.com/mssql/server:2022-latest
+    container_name: authcrud-sqlserver
+    environment:
+      ACCEPT_EULA: "Y"
+      MSSQL_SA_PASSWORD: "AuthCrud123!"
+    ports:
+      - "14333:1433"
+    volumes:
+      - sqlserver_data:/var/opt/mssql
+
+  api:
+    build:
+      context: .
+      dockerfile: backend/AuthCrud.Api/Dockerfile
+    container_name: authcrud-api
+    environment:
+      ASPNETCORE_URLS: "http://+:8080"
+      ASPNETCORE_ENVIRONMENT: "Development"
+      ConnectionStrings__DefaultConnection: "Server=sqlserver,1433;Database=AuthCrudDb;User Id=sa;Password=AuthCrud123!;TrustServerCertificate=True;Encrypt=False"
+      Jwt__Key: "EstaEsUnaClaveSuperSecretaParaJWT123456789!"
+      Jwt__Issuer: "AuthCrudApi"
+      Jwt__Audience: "AuthCrudFrontend"
+      Jwt__ExpiresInMinutes: "60"
+    ports:
+      - "5118:8080"
+    depends_on:
+      - sqlserver
+
+  frontend:
+    build:
+      context: .
+      dockerfile: frontend/Dockerfile
+      args:
+        VITE_API_URL: "http://localhost:5118/api"
+    container_name: authcrud-frontend
+    ports:
+      - "5173:80"
+    depends_on:
+      - api
+
+volumes:
+  sqlserver_data:
