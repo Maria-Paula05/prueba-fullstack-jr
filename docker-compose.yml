@@ -4,7 +4,7 @@ services:
     container_name: authcrud-sqlserver
     environment:
       ACCEPT_EULA: "Y"
-      MSSQL_SA_PASSWORD: "AuthCrud123!"
+      MSSQL_SA_PASSWORD:  ${SA_PASSWORD}
     ports:
       - "14333:1433"
     volumes:
@@ -19,10 +19,10 @@ services:
       ASPNETCORE_URLS: "http://+:8080"
       ASPNETCORE_ENVIRONMENT: "Development"
       ConnectionStrings__DefaultConnection: "Server=sqlserver,1433;Database=AuthCrudDb;User Id=sa;Password=AuthCrud123!;TrustServerCertificate=True;Encrypt=False"
-      Jwt__Key: "EstaEsUnaClaveSuperSecretaParaJWT123456789!"
-      Jwt__Issuer: "AuthCrudApi"
-      Jwt__Audience: "AuthCrudFrontend"
-      Jwt__ExpiresInMinutes: "60"
+      Jwt__Key:  ${JWT_KEY}
+      Jwt__Issuer: ${JWT_ISSUER}
+      Jwt__Audience:  ${JWT_AUDIENCE}
+      Jwt__ExpiresInMinutes: ${JWT_EXPIRES_IN_MINUTES}
     ports:
       - "5118:8080"
     depends_on:
