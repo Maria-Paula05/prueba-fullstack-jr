@@ -618,9 +618,14 @@ const uploadProfileAvatar = async (e) => {
 
   return (
     <main className="container">
-      <section className="card">
-        <h1>AuthCrud Frontend</h1>
-        <p>Frontend conectado con tu API en .NET.</p>
+      <section className={token ? "card appCard" : "card loginCard"}>
+      <header className="heroHeader">
+      <div className="logoMark"></div>
+      <h1>Gestión de usuarios</h1>
+      <p>
+    
+    </p>
+  </header>
 
         {loading && (
           <div className="info" aria-live="polite">
