@@ -10,4 +10,4 @@
 *.suo
 
 .env
-appsettings.Development.json
+appsettings.Development.jsonbackend/AuthCrud.Api/wwwroot/uploads/avatars/*
