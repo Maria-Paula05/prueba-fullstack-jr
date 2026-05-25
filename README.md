@@ -73,73 +73,98 @@ Password: User123!
 ## Estructura 
 
 prueba-fullstack-jr/
+
 ├── backend/
+
 │   └── AuthCrud.Api/
+
 ├── frontend/
+
 ├── .github/
+
 │   └── workflows/
+
 ├── docker-compose.yml
+
 ├── .dockerignore
+
 ├── .gitignore
+
 └── README.md
 
 ## Ejecutar con Docker Compose:
 
 **Desde la raíz del proyecto:**
-
+```text
 docker compose up --build -d
-
+```
 **Servicios Disponibles:**
 
-Frontend: http://localhost:5173
-Swagger:  http://localhost:5118/swagger
-
-SQL Server: localhost,14333
-
+Frontend: 
+```
+http://localhost:5173
+```
+Swagger: 
+```
+http://localhost:5118/swagger
+```
+SQL Server: 
+```
+localhost,14333
+```
 **Para detener los servicios:**
-
+```
 docker compose down
-
+```
 ## Ejecutar backend localmente:
 
 **Desde la carpeta del backend:(Powershell)**
-
+```
 cd backend/AuthCrud.Api
 dotnet restore
 dotnet ef database update
 dotnet run
-
+```
 **Swagger:**
-
+```
 http://localhost:5118/swagger
-
+```
 ## Ejecutar frontend localmente:
 
 **Desde la carpeta del frontend:(Powershell)**
-
+```
 cd frontend
 npm install
 npm run dev
-
+```
 **Frontend**
-
+```
 http://localhost:5173
-
+```
 ## Endpoints principales:
 
 **Auth:**
+
 POST /api/Auth/register
+
 POST /api/Auth/login
+
 POST /api/Auth/refresh
+
 POST /api/Auth/logout
 
 **Users:**
 
 GET    /api/Users
+
 GET    /api/Users/{id}
+
 POST   /api/Users
+
 PUT    /api/Users/{id}
+
 DELETE /api/Users/{id}
+
 POST   /api/Users/{id}/avatar
 
 ## Extras Implementados:
